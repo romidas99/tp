@@ -7,17 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
-
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
+## BizBook
 
 ### Joshua Rahul
 
@@ -29,31 +19,42 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Documentation
 * Responsibilities: Documentation
 
-### Johnny Doe
+=======
+### Nguyen Xuan Bach
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bmathnguyen.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/bmathnguyen)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Brainstorming, Coding
 
-### James Doe
+### Low Guo Zhang, Lucas
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/biggillyboyman.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/biggillyboyman)] [[portfolio](team/johndoe.md)]
+
+- Role: Developer
+- Responsibilities: Data
+
+### Then Kai Hsien
+
+<img src="images/romidas99.png" width="200px">
+
+[[github](http://github.com/romidas99)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Scheduling and tracking
+- Responsibilities: In charge of defining, assigning, and tracking project tasks
+
+### Kelvin Cai Wang
+
+<img src="images/caiwang0.png" width="200px">
+
+[[github](http://github.com/caiwang0)]
+[[portfolio](team/johndoe.md)]
+
+- Role: Developer
+- Responsibilities: UI
