@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Joshua Rahul
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bosh1707.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/Bosh1707)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: Documentation
 
 ### Johnny Doe
 
