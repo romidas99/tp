@@ -50,7 +50,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kelvin Cai Wang
 
-<<<<<<< HEAD
 <img src="images/" width="200px">
 =======
 <img src="images/caiwang0.png" width="200px">
