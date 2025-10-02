@@ -50,12 +50,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kelvin Cai Wang
 
-<img src="images/" width="200px">
-=======
 <img src="images/caiwang0.png" width="200px">
 
 [[github](http://github.com/caiwang0)]
->>>>>>> d79463cba0f411bb9af4cf1ca1c481cb188e305c
 [[portfolio](team/johndoe.md)]
 
 - Role: Developer
