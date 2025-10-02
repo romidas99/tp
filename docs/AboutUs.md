@@ -48,11 +48,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 - Role: Scheduling and tracking
 - Responsibilities: In charge of defining, assigning, and tracking project tasks
 
-### James Doe
+### Kelvin Cai Wang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/caiwang0.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/caiwang0)]
 [[portfolio](team/johndoe.md)]
 
 - Role: Developer
