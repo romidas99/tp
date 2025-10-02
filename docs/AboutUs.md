@@ -9,16 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## BizBook
 
-### John Doe
+### Joshua Rahul
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bosh1707.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/Bosh1707)]
 [[portfolio](team/johndoe.md)]
 
-- Role: Project Advisor
+* Role: Documentation
+* Responsibilities: Documentation
 
+=======
 ### Nguyen Xuan Bach
 
 <img src="images/bmathnguyen.png" width="200px">
