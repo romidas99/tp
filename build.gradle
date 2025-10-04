@@ -25,13 +25,6 @@ test {
     finalizedBy jacocoTestReport
 }
 
-jacocoTestReport {
-    reports {
-        xml.required = true
-        html.required = true
-    }
-}
-
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
