@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the AddressBook-Level3 project from [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -271,7 +271,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Tired of messy spreadsheets and scattered application tracking
 * Want a centralized system to track application progress and deadlines
 
-**Value proposition**: 
+**Value proposition**:
 
 BizBook helps students cut through the clutter of spreadsheets and web apps by providing a streamlined CLI-based internship tracker. Students can manage their entire application pipeline efficiently, staying organized and in control of their internship hunt, and accomplish application management tasks faster than with traditional GUI-driven tools.
 
@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User provides optional fields (description, status).
-  
+
   * 1a1. BizBook accepts and stores the optional information.
   
     Use case resumes at step 2.
@@ -475,15 +475,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-  
+
   * 2a1. BizBook shows a message indicating no applications exist.
-  
+
     Use case ends.
 
 * 4a. The given index is invalid.
-  
+
   * 4a1. BizBook shows an error message.
-  
+
     Use case resumes at step 3.
 
 ### Non-Functional Requirements
