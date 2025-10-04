@@ -4,7 +4,7 @@ title: BizBook
 ---
 
 [![CI Status](https://github.com/AY2526S1-CS2103T-T10-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2526S1-CS2103T-T10-1/tp/actions/workflows/gradle.yml)
-[![codecov](https://codecov.io/github/AY2526S1-CS2103T-T10-2/tp/graph/badge.svg?token=EK4GP6S1V4)](https://codecov.io/github/AY2526S1-CS2103T-T10-2/tp)
+[![codecov](https://codecov.io/github/AY2526S1-CS2103T-T10-1/tp/graph/badge.svg?token=EK4GP6S1V4)](https://codecov.io/github/AY2526S1-CS2103T-T10-2/tp)
 
 ![Ui](images/Ui.png)
 
