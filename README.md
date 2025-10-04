@@ -4,6 +4,7 @@
 
 ![Ui](docs/images/Ui.png)
 
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * This is **a project for Software Engineering (SE) students**.<br>
   Example usages:
     * as a digital internship tracking tool for students
@@ -12,4 +13,3 @@
     * It comes with a **reasonable level of user and developer documentation**.
 * It is named `BizBook` (`BB` for short) because it helps organise all the businesses people are interested in doing internships for.
 * For the detailed documentation of this project, see the **[BizBook Product Website](https://ay2526s1-cs2103t-t10-1.github.io/tp/)**.
-- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
