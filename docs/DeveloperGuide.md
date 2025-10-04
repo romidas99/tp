@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -124,7 +124,7 @@ The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `UserPref` object that represents the user's preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -161,9 +161,9 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
@@ -206,7 +206,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
@@ -262,71 +262,287 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* University students actively applying for multiple internships
+* Need to manage a significant number of internship applications simultaneously
+* Prefer desktop apps over web-based or mobile applications
+* Can type fast
+* Prefer typing to mouse interactions
+* Reasonably comfortable using CLI apps
+* Tired of messy spreadsheets and scattered application tracking
+* Want a centralized system to track application progress and deadlines
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
 
+BizBook helps students cut through the clutter of spreadsheets and web apps by providing a streamlined CLI-based internship tracker. Students can manage their entire application pipeline efficiently, staying organized and in control of their internship hunt, and accomplish application management tasks faster than with traditional GUI-driven tools.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                    | I want to …​                                                                                  | So that I can…​                                                                                  |
+|----------|-------------------------------------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| `* * *`  | student                                   | add a new internship application with company name and job title                              | quickly start tracking a new opportunity                                                         |
+| `* * *`  | student                                   | list all my tracked applications in a formatted table                                         | get a clear overview of my entire pipeline                                                       |
+| `* * *`  | student                                   | view all details of a specific application using its ID                                       | instantly recall information like job description link or my notes                               |
+| `* * *`  | student                                   | update the status of an application                                                           | keep my tracker current with my progress                                                         |
+| `* * *`  | student                                   | delete an application from my active list                                                     | remove roles I'm no longer pursuing                                                              |
+| `* * *`  | student                                   | see a unique ID for each application in the list view                                         | easily reference them in update, view and delete commands                                        |
+| `* * *`  | new user                                  | see usage instructions and available commands                                                 | learn how to use BizBook effectively                                                             |
+| `* *`    | student                                   | add a deadline date when creating a new application                                           | don't miss the submission cutoff                                                                 |
+| `* *`    | student                                   | add a URL to the original job posting                                                         | easily refer back to the full description and requirements                                       |
+| `* *`    | student                                   | add multi-line notes to an application                                                        | record details like interviewer names, key discussion points, or follow-up actions               |
+| `* *`    | student                                   | view all notes associated with a specific application                                         | quickly prepare for an interview                                                                 |
+| `* *`    | student                                   | add a contact person's name and email for an application                                      | know who to address my follow-up emails to                                                       |
+| `* *`    | student                                   | store the file path to the resume version I submitted                                         | remember which resume I used for each application                                                |
+| `* *`    | student                                   | edit any field of an existing application                                                     | correct typos or update information like a deadline                                              |
+| `* *`    | student                                   | filter my application list by status                                                          | focus only on the jobs I still need to apply for                                                 |
+| `* *`    | student                                   | filter my application list by company                                                         | see all the roles I've applied to at a specific organization                                     |
+| `* *`    | student                                   | sort my applications by deadline                                                              | prioritize my work on what's most urgent                                                         |
+| `* *`    | student                                   | view a statistical summary of my applications                                                 | see my progress at a glance                                                                      |
+| `* *`    | student                                   | see applications with deadlines in the next 7 days                                            | get an immediate view of my urgent tasks                                                         |
+| `* *`    | student                                   | search for companies using keywords in their description                                      | discover companies that align with my interests and studies                                      |
+| `* *`    | student                                   | filter search results by industry category                                                    | focus my search on sectors I want to work in                                                     |
+| `* *`    | student                                   | filter opportunities by job type                                                              | find roles that match my skills                                                                  |
+| `* *`    | student                                   | combine multiple filters                                                                      | find highly specific and relevant opportunities                                                  |
+| `* *`    | student                                   | sort search results by company name or application deadline                                   | organize opportunities and prioritize my applications                                            |
+| `* *`    | student                                   | clear all active filters with a single command                                                | easily start a new search                                                                        |
+| `*`      | student                                   | export my application data to a CSV file                                                      | create a backup or analyze it further in a spreadsheet                                           |
+| `*`      | student                                   | import applications from a CSV file                                                           | easily migrate my existing data from a spreadsheet into BizBook                                  |
+| `*`      | student                                   | archive a completed application                                                               | hide it from my active view while still keeping it for my records                                |
+| `*`      | student                                   | view my archived applications                                                                 | look back at my complete application history for a given season                                  |
+| `*`      | student                                   | search through all my notes for a specific keyword                                            | find which interview I discussed a particular topic in                                           |
+| `*`      | student                                   | clear all application data after a confirmation prompt                                        | easily start fresh for a new internship hunt season                                              |
+| `*`      | user                                      | receive clear confirmation messages after successfully adding or updating an application      | know my command worked                                                                           |
+| `*`      | user                                      | see helpful error messages if I use a command incorrectly                                     | learn how to use the tool properly                                                               |
+| `*`      | user                                      | see application statuses color-coded in the list view                                         | visually distinguish between different stages at a glance                                        |
+| `*`      | user                                      | set a default sort order in a configuration file                                              | don't have to type the sort flag every time I list my applications                               |
+| `*`      | user                                      | cancel a multi-step command midway through                                                    | easily back out if I make a mistake                                                              |
+| `*`      | user                                      | use CLI autocomplete for company names I've already entered                                   | save time and avoid typos                                                                        |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `BizBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### Use case: UC01 - Add an internship application
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new internship application with company name, industry, and job type.
+2. BizBook validates the input.
+3. BizBook adds the application to the list.
+4. BizBook shows a success message with the application details.
 
+   Use case ends.
+
+**Extensions**
+
+* 1a. User provides optional fields (description, status).
+  
+  * 1a1. BizBook accepts and stores the optional information.
+  
+    Use case resumes at step 2.
+
+* 2a. Required fields are missing.
+  
+  * 2a1. BizBook shows an error message indicating which fields are missing.
+  
     Use case ends.
+
+* 2b. Company name format is invalid.
+  
+  * 2b1. BizBook shows an error message about invalid format.
+  
+    Use case ends.
+
+* 2c. Industry is not from the predefined list.
+  
+  * 2c1. BizBook shows an error message with valid industry options.
+  
+    Use case ends.
+
+* 2d. An application for this company already exists.
+  
+  * 2d1. BizBook shows a duplicate company error message.
+  
+    Use case ends.
+
+#### Use case: UC02 - Update application status
+
+**MSS**
+
+1. User requests to list all applications.
+2. BizBook shows a numbered list of applications.
+3. User requests to update the status of a specific application by index.
+4. BizBook validates the index and new status.
+5. BizBook updates the application status.
+6. BizBook shows a success message with updated details.
+
+   Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+  
+  * 2a1. BizBook shows a message indicating no applications exist.
+  
+    Use case ends.
 
-  Use case ends.
+* 4a. The given index is invalid.
+  
+  * 4a1. BizBook shows an error message.
+  
+    Use case resumes at step 3.
 
-* 3a. The given index is invalid.
+* 4b. The given status is not valid.
+  
+  * 4b1. BizBook shows an error message with valid status options.
+  
+    Use case resumes at step 3.
 
-    * 3a1. AddressBook shows an error message.
+#### Use case: UC03 - Filter applications by status
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1. User requests to filter applications by a specific status.
+2. BizBook validates the status.
+3. BizBook displays all applications matching the status.
+4. BizBook shows the count of filtered applications.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given status is invalid.
+  
+  * 2a1. BizBook shows an error message with valid status options.
+  
+    Use case ends.
+
+* 3a. No applications match the given status.
+  
+  * 3a1. BizBook shows a message indicating no matches found.
+  
+    Use case ends.
+
+#### Use case: UC04 - Add notes to an application
+
+**MSS**
+
+1. User requests to list all applications.
+2. BizBook shows a numbered list of applications.
+3. User requests to view details of a specific application by index.
+4. BizBook shows full details of the application.
+5. User requests to add notes to this application.
+6. BizBook validates the index and note content.
+7. BizBook adds the note to the application.
+8. BizBook shows a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+  * 2a1. BizBook shows a message indicating no applications exist.
+  
+    Use case ends.
+
+* 4a. The given index is invalid.
+  
+  * 4a1. BizBook shows an error message.
+  
+    Use case resumes at step 3.
+
+* 6a. The note exceeds maximum length.
+  
+  * 6a1. BizBook shows an error message about note length limit.
+  
+    Use case resumes at step 5.
+
+#### Use case: UC05 - Delete an application
+
+**MSS**
+
+1. User requests to list all applications.
+2. BizBook shows a numbered list of applications.
+3. User requests to delete a specific application by index.
+4. BizBook validates the index.
+5. BizBook deletes the application.
+6. BizBook shows a success message with deleted application details.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+  * 2a1. BizBook shows a message indicating no applications exist.
+  
+    Use case ends.
+
+* 4a. The given index is invalid.
+  
+  * 4a1. BizBook shows an error message.
+  
+    Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. **Platform Compatibility**: Should work on any mainstream OS (Windows, Linux, macOS) as long as it has Java 17 or above installed.
 
-*{More to be added}*
+2. **Performance**: Should be able to hold up to 1000 internship applications without noticeable sluggishness in performance for typical usage.
+
+3. **Usability - Typing Efficiency**: A user with above-average typing speed for regular English text should be able to accomplish most tasks faster using commands than using the mouse.
+
+4. **Usability - Learning Curve**: A new user should be able to use all basic features (add, list, update, delete) after reading the User Guide for 15 minutes.
+
+5. **Usability - Error Messages**: Error messages should be clear and actionable, guiding users on how to correct their input.
+
+6. **Data Persistence**: Application data should be stored locally in a human-editable text file format (JSON).
+
+7. **Portability**: Should work without requiring an installer, allowing students to run it from a USB drive or cloud storage folder.
+
+8. **Reliability**: Should not lose data during normal operation. All data changes should be saved immediately.
+
+9. **Response Time**: All commands should execute and display results within 2 seconds under normal load.
+
+10. **Display Compatibility**: The GUI should be usable for standard screen resolutions of 1920x1080 and higher at 100% and 125% screen scales.
+
+11. **Display Compatibility - Minimum**: The GUI should remain functional (though not optimal) for resolutions of 1280x720 and higher at 150% scale.
+
+12. **Extensibility**: The command structure should be designed to easily accommodate new fields and commands in future versions.
+
+13. **Data Privacy**: Application data should remain local and private to the user, with no external data transmission.
+
+14. **Command Flexibility**: Commands should be case-insensitive and tolerant of minor spacing variations to improve user experience.
+
+15. **Scalability**: Should handle increasing numbers of applications efficiently as students apply to more positions throughout the internship season.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+
+* **Application**: A record of an internship opportunity that a student is tracking, including company details, job information, and application status
+
+* **Status**: The current stage of an internship application in the pipeline (e.g., Saved, Applied, Interviewing, Offer, Rejected)
+
+* **Index**: A positive integer representing the position of an application in the displayed list, used for referencing specific applications in commands
+
+* **Industry Category**: A predefined classification of companies by their primary business sector (e.g., Tech, Finance, Consulting, Healthcare)
+
+* **Job Type**: The specific internship role title or position (e.g., "Software Engineer Intern", "Data Analyst Intern")
+
+* **Pipeline**: The complete collection of internship applications a student is tracking in BizBook
+
+* **CLI**: Command Line Interface - a text-based interface for interacting with the application
+
+* **Filter**: A command operation that displays only applications matching specific criteria
+
+* **Archive**: A feature to hide completed applications from the active view while preserving them for historical reference
+
+* **Deadline**: The submission cutoff date for an internship application
+
+* **Contact Person**: The recruiter or HR representative associated with a specific internship application
 
 --------------------------------------------------------------------------------------------------------------------
 
