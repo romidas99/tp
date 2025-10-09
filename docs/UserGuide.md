@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+BizBook is a **desktop app for managing job applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BizBook can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -15,7 +15,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T10-1/tp/).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -26,13 +26,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all job applications.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add j/Google p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a job application for `Google` to BizBook.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd application shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all applications.
 
    * `exit` : Exits the app.
 
@@ -73,25 +73,25 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding an application: `add`
 
-Adds a person to the address book.
+Adds a new internship application to BizBook.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/COMPANY_NAME p/PHONE_NUMBER s/STATUS e/EMAIL a/ADDRESS [t/TAG]…`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Google p/98765432 e/careers@google.com s/Pending a/70 Pasir Panjang Road, #03-71 t/tech t/pending`
+* `add n/DBS Bank t/finance e/internships@dbs.com s/Rejected a/12 Marina Boulevard p/12345678 t/interview`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all internship applications in BizBook.
 
-Format: `list`
+Format: `list
 
 ### Editing a person : `edit`
 
