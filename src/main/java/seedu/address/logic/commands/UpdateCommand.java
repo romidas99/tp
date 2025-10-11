@@ -52,10 +52,8 @@ public class UpdateCommand extends Command {
         }
 
         Person personToUpdate = lastShownList.get(index.getZeroBased());
-        
         // For now, just return a success message without actually updating the person
-        return new CommandResult(String.format(MESSAGE_UPDATE_PERSON_SUCCESS, 
-                personToUpdate.getName(), status));
+        return new CommandResult(String.format(MESSAGE_UPDATE_PERSON_SUCCESS, personToUpdate.getName(), status));
     }
 
     @Override
