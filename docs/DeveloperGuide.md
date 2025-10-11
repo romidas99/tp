@@ -448,15 +448,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 * 4a. The given index is invalid.
-  
+
   * 4a1. BizBook shows an error message.
-  
+
     Use case resumes at step 3.
 
 * 6a. The note exceeds maximum length.
-  
+
   * 6a1. BizBook shows an error message about note length limit.
-  
+
     Use case resumes at step 5.
 
 #### Use case: UC05 - Delete an application
