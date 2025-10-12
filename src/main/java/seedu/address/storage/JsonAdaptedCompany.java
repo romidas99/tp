@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Company.InternshipApplication;
+import seedu.address.model.ApplicationStatus.ApplicationStatus;
 import seedu.address.model.Company.CompanyName;
-import seedu.address.model.Industry.Industry;
-import seedu.address.model.Company.JobType;
 import seedu.address.model.Company.Description;
 import seedu.address.model.Company.Email;
-import seedu.address.model.ApplicationStatus.ApplicationStatus;
+import seedu.address.model.Company.InternshipApplication;
+import seedu.address.model.Company.JobType;
+import seedu.address.model.Industry.Industry;
 
 /**
  * Jackson-friendly version of {@link InternshipApplication}.

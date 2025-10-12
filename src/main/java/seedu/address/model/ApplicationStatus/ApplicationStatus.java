@@ -1,6 +1,7 @@
 package seedu.address.model.ApplicationStatus;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
