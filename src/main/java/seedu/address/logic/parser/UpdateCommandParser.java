@@ -38,7 +38,7 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         }
 
         String statusString = argMultimap.getValue(PREFIX_STATUS).get();
-        
+
         // Convert to proper case for validation
         String normalizedStatus = normalizeStatus(statusString);
         if (!ApplicationStatus.isValidStatus(normalizedStatus)) {
@@ -56,13 +56,13 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
      */
     private String normalizeStatus(String statusInput) {
         String[] validStatuses = ApplicationStatus.VALID_STATUSES;
-        
+
         for (String validStatus : validStatuses) {
             if (validStatus.equalsIgnoreCase(statusInput)) {
                 return validStatus;
             }
         }
-        
+
         // If no match found, return original input (will be caught by validation)
         return statusInput;
     }

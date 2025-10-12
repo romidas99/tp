@@ -64,7 +64,7 @@ public class UpdateCommand extends Command {
 
         model.setPerson(applicationToUpdate, updatedApplication);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_UPDATE_APPLICATION_SUCCESS, 
+        return new CommandResult(String.format(MESSAGE_UPDATE_APPLICATION_SUCCESS,
                 applicationToUpdate.getName(), status));
     }
 
