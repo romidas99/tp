@@ -4,12 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.io.ObjectInputFilter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -20,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.Company.*;
 import seedu.address.model.Company.CompanyName;
 import seedu.address.model.Industry.Industry;
+import seedu.address.model.ApplicationStatus.ApplicationStatus;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -33,12 +32,13 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_COMPANY_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_JOB_TYPE + "JOBTYPE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_INDUSTRY + "INDUSTRY]"
+            + "[" + PREFIX_STATUS + "STATUS]"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
+            + PREFIX_JOB_TYPE + "SWE INTERN "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -91,10 +91,11 @@ public class EditCommand extends Command {
         CompanyName updatedCompanyName = editPersonDescriptor.getName().orElse(internshipApplicationToEdit.getName());
         JobType updatedJobType = editPersonDescriptor.getPhone().orElse(internshipApplicationToEdit.getJobType());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(internshipApplicationToEdit.getEmail());
-        Description updatedDescription = editPersonDescriptor.getAddress().orElse(internshipApplicationToEdit.getDescription());
-        Set<Industry> updatedIndustries = editPersonDescriptor.getTags().orElse(internshipApplicationToEdit.getIndustry());
+        Description updatedDescription = editPersonDescriptor.getDescription().orElse(internshipApplicationToEdit.getDescription());
+        Industry updatedIndustries = editPersonDescriptor.getIndustries().orElse(internshipApplicationToEdit.getIndustry());
+        ApplicationStatus updatedStatus = editPersonDescriptor.getStatus().orElse(internshipApplicationToEdit.getStatus());
 
-        return new InternshipApplication(updatedCompanyName, updatedJobType, updatedEmail, updatedDescription, updatedIndustries);
+        return new InternshipApplication(updatedCompanyName, updatedIndustries, updatedJobType, updatedDescription, updatedStatus, updatedEmail);
     }
 
     @Override
@@ -130,7 +131,10 @@ public class EditCommand extends Command {
         private JobType jobType;
         private Email email;
         private Description description;
-        private Set<Industry> industries;
+        private Industry industries;
+
+        private ApplicationStatus status;
+
 
         public EditPersonDescriptor() {}
 
@@ -142,8 +146,8 @@ public class EditCommand extends Command {
             setName(toCopy.companyName);
             setPhone(toCopy.jobType);
             setEmail(toCopy.email);
-            setAddress(toCopy.description);
-            setTags(toCopy.industries);
+            setDescription(toCopy.description);
+            setIndustry(toCopy.industries);
         }
 
         /**
@@ -177,11 +181,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Description description) {
+        public void setDescription(Description description) {
             this.description = description;
         }
 
-        public Optional<Description> getAddress() {
+        public Optional<Description> getDescription() {
             return Optional.ofNullable(description);
         }
 
@@ -189,8 +193,8 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Industry> industries) {
-            this.industries = (industries != null) ? new HashSet<>(industries) : null;
+        public void setIndustry(Industry industries) {
+            this.industries = industries;
         }
 
         /**
@@ -198,9 +202,15 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Industry>> getTags() {
-            return (industries != null) ? Optional.of(Collections.unmodifiableSet(industries)) : Optional.empty();
+        public Optional<Industry> getIndustries() {
+            return Optional.ofNullable(industries);
         }
+
+        public void setStatus(ApplicationStatus status) {
+            this.status = status;
+        }
+
+        public Optional<ApplicationStatus> getStatus() { return Optional.ofNullable(status);}
 
         @Override
         public boolean equals(Object other) {
@@ -224,11 +234,12 @@ public class EditCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", companyName)
-                    .add("phone", jobType)
+                    .add("company name", companyName)
+                    .add("job type", jobType)
                     .add("email", email)
-                    .add("address", description)
-                    .add("tags", industries)
+                    .add("description", description)
+                    .add("industry", industries)
+                    .add("status", status)
                     .toString();
         }
     }

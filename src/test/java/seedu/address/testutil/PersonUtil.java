@@ -1,11 +1,8 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.Company.InternshipApplication;
-import seedu.address.model.Industry.Industry;
 
 import static seedu.address.logic.parser.CliSyntax.*;
 
@@ -44,9 +41,9 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_COMPANY_NAME).append(name.CompanyName).append(" "));
         descriptor.getPhone().ifPresent(jobType -> sb.append(PREFIX_JOB_TYPE).append(jobType.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(description -> sb.append(PREFIX_DESCRIPTION).append(description.value).append(" "));
-        descriptor.getAddress().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.value).append(" "));
-        descriptor.getAddress().ifPresent(industry -> sb.append(PREFIX_INDUSTRY).append(industry.value).append(" "));
+        descriptor.getDescription().ifPresent(description -> sb.append(PREFIX_DESCRIPTION).append(description.value).append(" "));
+        descriptor.getDescription().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.value).append(" "));
+        descriptor.getDescription().ifPresent(industry -> sb.append(PREFIX_INDUSTRY).append(industry.value).append(" "));
 
         return sb.toString();
     }

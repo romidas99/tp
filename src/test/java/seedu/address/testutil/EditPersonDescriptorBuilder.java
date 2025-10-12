@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.Company.*;
 import seedu.address.model.Company.CompanyName;
@@ -32,8 +28,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(internshipApplication.getName());
         descriptor.setPhone(internshipApplication.getJobType());
         descriptor.setEmail(internshipApplication.getEmail());
-        descriptor.setAddress(internshipApplication.getDescription());
-        descriptor.setTags(internshipApplication.getIndustry());
+        descriptor.setDescription(internshipApplication.getDescription());
+        descriptor.setIndustry(internshipApplication.getIndustry());
     }
 
     /**
@@ -64,7 +60,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Description(address));
+        descriptor.setDescription(new Description(address));
         return this;
     }
 
@@ -72,9 +68,8 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Industry> industrySet = Stream.of(tags).map(Industry::new).collect(Collectors.toSet());
-        descriptor.setTags(industrySet);
+    public EditPersonDescriptorBuilder withTags(String industry) {
+        descriptor.setIndustry(new Industry(industry));
         return this;
     }
 

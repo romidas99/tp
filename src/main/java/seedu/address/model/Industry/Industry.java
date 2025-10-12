@@ -33,10 +33,21 @@ public class Industry {
     /**
      * Returns true if a given string is one of the valid industry names.
      */
+// In Industry.java
+
+    /**
+     * Returns true if a given string is one of the valid industry names, ignoring case and leading/trailing whitespace.
+     */
     public static boolean isValidIndustry(String test) {
+        // 1. Remove leading/trailing whitespace
+        String trimmedTest = test.trim();
+
+        // 2. Convert the trimmed input to a consistent case (e.g., uppercase) for comparison
+        String upperCaseTest = trimmedTest.toUpperCase();
+
         for (String validIndustry : VALID_INDUSTRIES) {
-            // Checks for an exact match against the predefined list.
-            if (validIndustry.equals(test)) {
+            // Compare the uppercase input against the uppercase valid industry
+            if (validIndustry.toUpperCase().equals(upperCaseTest)) {
                 return true;
             }
         }
