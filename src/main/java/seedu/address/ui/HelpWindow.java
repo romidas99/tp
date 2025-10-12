@@ -124,7 +124,7 @@ public class HelpWindow extends UiPart<Stage> {
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(HELP_MESSAGE);
+//        url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
     }
 }
