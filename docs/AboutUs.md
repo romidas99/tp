@@ -7,53 +7,54 @@ We are a team based in the [School of Computing, National University of Singapor
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
-## Project team
+## BizBook
 
-### John Doe
+### Joshua Rahul
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bosh1707.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/Bosh1707)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Documentation
+* Responsibilities: Documentation
 
-### Jane Doe
+=======
+### Nguyen Xuan Bach
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bmathnguyen.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/bmathnguyen)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: Brainstorming, Coding
 
-### Johnny Doe
+### Low Guo Zhang, Lucas
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/biggillyboyman.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/biggillyboyman)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Data
 
-### Jean Doe
+### Then Kai Hsien
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/romidas99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/romidas99)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Scheduling and tracking
+- Responsibilities: In charge of defining, assigning, and tracking project tasks
 
-### James Doe
+### Kelvin Cai Wang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/caiwang0.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/caiwang0)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: UI
