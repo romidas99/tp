@@ -41,7 +41,7 @@ public class AddCommandTest {
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validInternshipApplication)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validInternshipApplication), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validInternshipApplication), modelStub.CompanyAdded);
     }
 
     @Test
@@ -181,18 +181,18 @@ public class AddCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<InternshipApplication> personsAdded = new ArrayList<>();
+        final ArrayList<InternshipApplication> CompanyAdded = new ArrayList<>();
 
         @Override
         public boolean hasPerson(InternshipApplication internshipApplication) {
             requireNonNull(internshipApplication);
-            return personsAdded.stream().anyMatch(internshipApplication::isSameApplication);
+            return CompanyAdded.stream().anyMatch(internshipApplication::isSameApplication);
         }
 
         @Override
         public void addPerson(InternshipApplication internshipApplication) {
             requireNonNull(internshipApplication);
-            personsAdded.add(internshipApplication);
+            CompanyAdded.add(internshipApplication);
         }
 
         @Override
