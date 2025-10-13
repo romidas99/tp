@@ -26,9 +26,11 @@ BizBook is a **desktop app for managing job applications, optimized for use via 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all job applications.
+   * `list` : Lists all internship applications.
 
-   * `add j/Google p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a job application for `Google` to BizBook.
+   * `add n/Google i/Tech a/SWE Intern t/Backend microservices e/careers@google.com s/Saved` : Adds a Google application.
+
+   * `update 1 s/Interviewing` : Updates the 1st application's status to Interviewing.
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
@@ -77,74 +79,85 @@ Format: `help`
 
 Adds a new internship application to BizBook.
 
-Format: `add n/COMPANY_NAME p/PHONE_NUMBER s/STATUS e/EMAIL a/ADDRESS [t/TAG]…`
+Format: `add n/COMPANY_NAME i/INDUSTRY a/JOB_TYPE t/DESCRIPTION e/EMAIL s/STATUS`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A internshipApplication can have any number of industries (including 0)
-</div>
+Notes:
+- `INDUSTRY` must be one of: Technology, Finance, Consulting, Healthcare, Marketing, Operations, Graphic Design
+- `STATUS` must be one of: Saved, Applied, Interviewing, Offer, Rejected.
 
 Examples:
-* `add n/Google p/98765432 e/careers@google.com s/Pending a/70 Pasir Panjang Road, #03-71 t/tech t/pending`
-* `add n/DBS Bank t/finance e/internships@dbs.com s/Rejected a/12 Marina Boulevard p/12345678 t/interview`
+* `add n/Google i/Technology a/SWE Intern t/Backend microservices e/careers@google.com s/Saved`
+* `add n/DBS Bank i/Finance a/Data Analyst Intern t/Analytics team e/internships@dbs.com s/Applied`
 
-### Listing all internshipApplications : `list`
+### Listing all applications : `list`
 
 Shows a list of all internship applications in BizBook.
 
-Format: `list
+Format: `list`
 
-### Editing a internshipApplication : `edit`
+### Editing an application : `edit`
 
-Edits an existing internshipApplication in the description book.
+Edits an existing internship application.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/COMPANY_NAME] [i/INDUSTRY] [a/JOB_TYPE] [t/DESCRIPTION] [e/EMAIL]`
 
-* Edits the internshipApplication at the specified `INDEX`. The index refers to the index number shown in the displayed internshipApplication list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing industries, the existing industries of the internshipApplication will be removed i.e adding of industries is not cumulative.
-* You can remove all the internshipApplication’s industries by typing `t/` without
-    specifying any industries after it.
+Notes:
+* Edits the application at the specified `INDEX` (as shown in the current list). Index is **1-based**.
+* At least one field must be provided.
+* Existing values will be overwritten by the inputs.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the jobType number and email description of the 1st internshipApplication to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the companyName of the 2nd internshipApplication to be `Betsy Crower` and clears all existing industries.
+*  `edit 1 n/Google Singapore`
+*  `edit 2 a/Quant Intern t/Global Markets desk`
 
-### Locating internshipApplications by companyName: `find`
+### Updating application status : `update`
 
-Finds internshipApplications whose names contain any of the given keywords.
+Updates only the status of an existing internship application.
+
+Format: `update INDEX s/NEW_STATUS`
+
+Notes:
+* `NEW_STATUS` must be one of: Saved, Applied, Interviewing, Offer, Rejected.
+* Input is case-insensitive (e.g., `s/interviewing`, `s/INTERVIEWING` are accepted).
+
+Examples:
+* `update 1 s/Interviewing`
+* `update 2 s/rejected`
+
+### Finding applications by company name: `find`
+
+Finds applications whose company names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the companyName is searched.
+* Only the company name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find google` returns applications whose company name contains `google`.
+* `find acme corp` returns applications matching either `acme` or `corp`.
 
-### Deleting a internshipApplication : `delete`
+### Deleting an application : `delete`
 
-Deletes the specified internshipApplication from the description book.
+Deletes the specified internship application.
 
 Format: `delete INDEX`
 
-* Deletes the internshipApplication at the specified `INDEX`.
-* The index refers to the index number shown in the displayed internshipApplication list.
+* Deletes the application at the specified `INDEX`.
+* The index refers to the number shown in the current list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd internshipApplication in the description book.
-* `find Betsy` followed by `delete 1` deletes the 1st internshipApplication in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd application in the list.
+* `find Google` followed by `delete 1` deletes the 1st application in the search results.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the description book.
+Clears all entries from BizBook.
 
 Format: `clear`
 
@@ -156,15 +169,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Data are saved to disk automatically after any command that changes data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users may edit that file directly.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, the app will discard all data and start with an empty data file at the next run. Always back up the file before editing it.<br>
+Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., invalid values). Edit the data file only if you are confident you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -191,10 +204,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/COMPANY_NAME i/INDUSTRY a/JOB_TYPE t/DESCRIPTION e/EMAIL s/STATUS` <br> e.g., `add n/Google i/Technology a/SWE Intern t/Backend microservices e/careers@google.com s/Saved`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit** | `edit INDEX n/COMPANY_NAME i/INDUSTRY a/JOB_TYPE t/DESCRIPTION e/EMAIL`<br> e.g.,`edit 2 a/Quant Intern t/Global Markets`
+**Find** | `find KEYWORD MORE_KEYWORDS`<br> e.g., `find google`
 **List** | `list`
+**Update** | `update INDEX s/STATUS` (status is case-insensitive input)
 **Help** | `help`
