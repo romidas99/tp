@@ -86,21 +86,6 @@ Shows a list of all internship applications in BizBook.
 
 Format: `list`
 
-### Editing an application : `edit`
-
-Edits an existing internship application.
-
-Format: `edit INDEX [n/COMPANY_NAME] [i/INDUSTRY] [a/JOB_TYPE] [t/DESCRIPTION] [e/EMAIL]`
-
-Notes:
-* Edits the application at the specified `INDEX` (as shown in the current list). Index is **1-based**.
-* At least one field must be provided.
-* Existing values will be overwritten by the inputs.
-
-Examples:
-*  `edit 1 n/Google Singapore`
-*  `edit 2 a/Quant Intern t/Global Markets desk`
-
 ### Updating application status : `update`
 
 Updates only the status of an existing internship application.
@@ -114,23 +99,6 @@ Notes:
 Examples:
 * `update 1 s/Interviewing`
 * `update 2 s/rejected`
-
-### Finding applications by company name: `find`
-
-Finds applications whose company names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the company name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find google` returns applications whose company name contains `google`.
-* `find acme corp` returns applications matching either `acme` or `corp`.
 
 ### Deleting an application : `delete`
 
