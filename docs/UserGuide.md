@@ -28,7 +28,7 @@ BizBook is a **desktop app for managing job applications, optimized for use via 
 
    * `list` : Lists all internship applications.
 
-   * `add n/Google i/Tech a/SWE Intern t/Backend microservices e/careers@google.com s/Saved` : Adds a Google application.
+   * `add n/Google i/Technology a/SWE Intern t/Backend microservices e/careers@google.com s/Saved` : Adds a Google application.
 
    * `edit 1 s/Interviewing` : Edits the 1st application's status to "Interviewing".
 
