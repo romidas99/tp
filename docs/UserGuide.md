@@ -30,7 +30,7 @@ BizBook is a **desktop app for managing job applications, optimized for use via 
 
    * `add n/Google i/Tech a/SWE Intern t/Backend microservices e/careers@google.com s/Saved` : Adds a Google application.
 
-   * `update 1 s/Interviewing` : Updates the 1st application's status to Interviewing.
+   * `edit 1 s/Interviewing` : Edits the 1st application's status to "Interviewing".
 
    * `delete 3` : Deletes the 3rd application shown in the current list.
 
@@ -53,6 +53,9 @@ BizBook is a **desktop app for managing job applications, optimized for use via 
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Items in square brackets are optional.<br>
+  e.g `edit INDEX [n/COMPANY_NAME] [i/INDUSTRY] [a/JOB_TYPE] [e/EMAIL] [t/DESCRIPTION] [s/STATUS]` can be used with or without the description.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -86,19 +89,22 @@ Shows a list of all internship applications in BizBook.
 
 Format: `list`
 
-### Updating application status : `update`
+### Editing an application : `edit`
 
-Updates only the status of an existing internship application.
+Edits the details of an existing internship application.
 
-Format: `update INDEX s/NEW_STATUS`
+Format: `edit INDEX [n/COMPANY_NAME] [i/INDUSTRY] [a/JOB_TYPE] [e/EMAIL] [t/DESCRIPTION] [s/STATUS]`
 
 Notes:
-* `NEW_STATUS` must be one of: Saved, Applied, Interviewing, Offer, Rejected.
-* Input is case-insensitive (e.g., `s/interviewing`, `s/INTERVIEWING` are accepted).
+* Edits the application at the specified `INDEX` (as shown in the current list). The index is **1-based**.
+* At least one field to edit must be provided.
+* Existing values will be overwritten by the new inputs.
+* Input for `INDUSTRY` and `STATUS` is case-insensitive (e.g., `i/technology` and `s/applied` are accepted).
 
 Examples:
-* `update 1 s/Interviewing`
-* `update 2 s/rejected`
+* `edit 1 n/Google Singapore`
+* `edit 2 s/Interviewing`
+* `edit 3 a/Quant Intern t/Global Markets desk`
 
 ### Deleting an application : `delete`
 
@@ -167,5 +173,5 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **List** | `list`
-**Update** | `update INDEX s/STATUS` (status is case-insensitive input)
+| **Edit** | `edit INDEX [n/COMPANY_NAME] [i/INDUSTRY] [a/JOB_TYPE] [e/EMAIL] [t/DESCRIPTION] [s/STATUS]`<br> e.g.,`edit 2 s/Interviewing` |
 **Help** | `help`
