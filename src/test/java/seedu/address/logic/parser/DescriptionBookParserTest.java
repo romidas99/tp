@@ -29,6 +29,10 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
+/**
+ * Contains integration tests for AddressBookParser in the context of an internship tracker application.
+ * Tests parsing of various command types to ensure correct command creation.
+ */
 public class DescriptionBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();

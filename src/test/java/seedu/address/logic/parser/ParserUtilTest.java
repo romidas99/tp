@@ -16,10 +16,14 @@ import seedu.address.model.Company.Description;
 import seedu.address.model.Company.Email;
 import seedu.address.model.Industry.Industry;
 import seedu.address.model.Company.JobType;
-// Removed unnecessary import: import seedu.address.model.Industry.Industry; (Already in Company.*)
 
+/**
+ * Contains unit tests for ParserUtil in the context of an internship tracker application.
+ * Tests parsing of various field types including company names, job types, descriptions,
+ * emails, industries, and application statuses.
+ */
 public class ParserUtilTest {
-    // Renamed constants for clarity and alignment with model fields
+    // Test constants aligned with internship tracker model fields
     private static final String INVALID_COMPANY_NAME = "R@chel";
     private static final String INVALID_JOB_TYPE = "S.E. Intern!"; // Example invalid JobType (symbols)
     private static final String INVALID_DESCRIPTION = ""; // Example invalid Description (blank might be invalid based on inner logic)
@@ -129,7 +133,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
-        // NOTE: The description value often keeps all internal whitespace after trimming, as implemented in Address.java
+        // NOTE: The description value often keeps all internal whitespace after trimming
         String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
         Description expectedDescription = new Description(VALID_DESCRIPTION);
         assertEquals(expectedDescription, ParserUtil.parseDescription(descriptionWithWhitespace));
@@ -160,7 +164,7 @@ public class ParserUtilTest {
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
-    // ============================= INDUSTRY TESTS (replaces parseTag/single value) ==============================
+    // ============================= INDUSTRY TESTS ==============================
 
     @Test
     public void parseIndustry_null_throwsNullPointerException() {
@@ -169,7 +173,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndustry_invalidValue_throwsParseException() {
-        // Testing against the fixed set of valid industries
+        // Testing against the predefined set of valid industries
         assertThrows(ParseException.class, () -> ParserUtil.parseIndustry(INVALID_INDUSTRY));
     }
 
@@ -186,7 +190,7 @@ public class ParserUtilTest {
         assertEquals(expectedIndustry, ParserUtil.parseIndustry(industryWithWhitespace));
     }
 
-    // ============================= STATUS TESTS (new method) ==============================
+    // ============================= APPLICATION STATUS TESTS ==============================
 
     @Test
     public void parseStatus_null_throwsNullPointerException() {
@@ -195,7 +199,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseStatus_invalidValue_throwsParseException() {
-        // Testing against the fixed set of valid statuses
+        // Testing against the predefined set of valid application statuses
         assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_STATUS));
     }
 
@@ -214,5 +218,6 @@ public class ParserUtilTest {
 
     // ============================= OBSOLETE COLLECTION TESTS (REMOVED) ==============================
     // The tests for parseTags_null, parseTags_collectionWithInvalidTags, parseTags_emptyCollection,
-    // and parseTags_collectionWithValidTags have been removed as 'Industry' is a single field.
+    // and parseTags_collectionWithValidTags have been removed as 'Industry' is a single field
+    // rather than a collection in the internship tracker application.
 }

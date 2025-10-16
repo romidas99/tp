@@ -22,33 +22,53 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // Valid InternshipApplication Fields
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_JOB_TYPE_AMY = "SWE Intern";
+    public static final String VALID_JOB_TYPE_BOB = "Data Analyst";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_DESCRIPTION_AMY = "Backend microservices";
+    public static final String VALID_DESCRIPTION_BOB = "Analytics team";
+    public static final String VALID_INDUSTRY_TECH = "Technology";
+    public static final String VALID_INDUSTRY_FINANCE = "Finance";
+    public static final String VALID_STATUS_APPLIED = "Applied";
+    public static final String VALID_STATUS_SAVED = "Saved";
 
+
+    // Command Descriptors for Names
     public static final String NAME_DESC_AMY = " " + PREFIX_COMPANY_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_COMPANY_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_COMPANY_NAME + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_COMPANY_NAME + VALID_PHONE_BOB;
+
+    // Command Descriptors for Job Types
+    public static final String JOB_TYPE_DESC_AMY = " " + PREFIX_JOB_TYPE + VALID_JOB_TYPE_AMY;
+    public static final String JOB_TYPE_DESC_BOB = " " + PREFIX_JOB_TYPE + VALID_JOB_TYPE_BOB;
+
+    // Command Descriptors for Emails
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_INDUSTRY + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_INDUSTRY + VALID_TAG_HUSBAND;
 
+    // Command Descriptors for Descriptions
+    public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_AMY;
+    public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
+
+    // Command Descriptors for Industries
+    public static final String INDUSTRY_DESC_TECH = " " + PREFIX_INDUSTRY + VALID_INDUSTRY_TECH;
+    public static final String INDUSTRY_DESC_FINANCE = " " + PREFIX_INDUSTRY + VALID_INDUSTRY_FINANCE;
+
+    // Command Descriptors for Status
+    public static final String STATUS_DESC_APPLIED = " " + PREFIX_STATUS + VALID_STATUS_APPLIED;
+    public static final String STATUS_DESC_SAVED = " " + PREFIX_STATUS + VALID_STATUS_SAVED;
+
+    // Invalid Field Descriptors
     public static final String INVALID_NAME_DESC = " " + PREFIX_COMPANY_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_JOB_TYPE_DESC = " " + PREFIX_JOB_TYPE + "a*"; // '*' not allowed
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_JOB_TYPE; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_DESCRIPTION + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + " "; // cannot be blank
+    public static final String INVALID_INDUSTRY_DESC = " " + PREFIX_INDUSTRY + "not-a-valid-industry"; // not in predefined list
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "pending"; // not a valid status
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -58,11 +78,11 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withJobType(VALID_JOB_TYPE_AMY).withEmail(VALID_EMAIL_AMY).withDescription(VALID_DESCRIPTION_AMY)
+                .withIndustry(VALID_INDUSTRY_TECH).withStatus(VALID_STATUS_APPLIED).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withJobType(VALID_JOB_TYPE_BOB).withEmail(VALID_EMAIL_BOB).withDescription(VALID_DESCRIPTION_BOB)
+                .withIndustry(VALID_INDUSTRY_FINANCE).withStatus(VALID_STATUS_SAVED).build();
     }
 
     /**
@@ -95,7 +115,7 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the address book, filtered application list and selected application in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
@@ -108,10 +128,10 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the application at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showApplicationAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         InternshipApplication internshipApplication = model.getFilteredPersonList().get(targetIndex.getZeroBased());

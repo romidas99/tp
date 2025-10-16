@@ -7,6 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Contains unit tests for ArgumentTokenizer.
+ * Tests the tokenization of command arguments with various prefixes in the context of
+ * an internship tracker application.
+ */
 public class ArgumentTokenizerTest {
 
     private final Prefix unknownPrefix = new Prefix("--u");
