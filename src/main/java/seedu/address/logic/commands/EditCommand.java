@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.io.ObjectInputFilter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -15,10 +14,14 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.Company.*;
-import seedu.address.model.Company.CompanyName;
-import seedu.address.model.Industry.Industry;
 import seedu.address.model.ApplicationStatus.ApplicationStatus;
+import seedu.address.model.Company.CompanyName;
+import seedu.address.model.Company.Description;
+import seedu.address.model.Company.Email;
+import seedu.address.model.Company.InternshipApplication;
+import seedu.address.model.Company.JobType;
+import seedu.address.model.Industry.Industry;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -27,23 +30,23 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the application identified "
+            + "by the index number used in the displayed application list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_COMPANY_NAME + "NAME] "
-            + "[" + PREFIX_JOB_TYPE + "JOBTYPE] "
+            + "[" + PREFIX_COMPANY_NAME + "COMPANY_NAME] "
+            + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
+            + "[" + PREFIX_JOB_TYPE + "JOB_TYPE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
-            + "[" + PREFIX_INDUSTRY + "INDUSTRY]"
-            + "[" + PREFIX_STATUS + "STATUS]"
+            + "[" + PREFIX_STATUS + "STATUS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_JOB_TYPE + "SWE INTERN "
+            + PREFIX_JOB_TYPE + "SWE Intern "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Application: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This application already exists in BizBook.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -70,7 +73,7 @@ public class EditCommand extends Command {
         }
 
         InternshipApplication internshipApplicationToEdit = lastShownList.get(index.getZeroBased());
-        InternshipApplication editedInternshipApplication = createEditedPerson(internshipApplicationToEdit, editPersonDescriptor);
+        InternshipApplication editedInternshipApplication = createEditedApplication(internshipApplicationToEdit, editPersonDescriptor);
 
         if (!internshipApplicationToEdit.isSameApplication(editedInternshipApplication) && model.hasPerson(editedInternshipApplication)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -82,20 +85,20 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code InternshipApplication} with the details of {@code applicationToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static InternshipApplication createEditedPerson(InternshipApplication internshipApplicationToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert internshipApplicationToEdit != null;
+    private static InternshipApplication createEditedApplication(InternshipApplication applicationToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert applicationToEdit != null;
 
-        CompanyName updatedCompanyName = editPersonDescriptor.getName().orElse(internshipApplicationToEdit.getName());
-        JobType updatedJobType = editPersonDescriptor.getPhone().orElse(internshipApplicationToEdit.getJobType());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(internshipApplicationToEdit.getEmail());
-        Description updatedDescription = editPersonDescriptor.getDescription().orElse(internshipApplicationToEdit.getDescription());
-        Industry updatedIndustries = editPersonDescriptor.getIndustries().orElse(internshipApplicationToEdit.getIndustry());
-        ApplicationStatus updatedStatus = editPersonDescriptor.getStatus().orElse(internshipApplicationToEdit.getStatus());
+        CompanyName updatedCompanyName = editPersonDescriptor.getName().orElse(applicationToEdit.getName());
+        Industry updatedIndustry = editPersonDescriptor.getIndustry().orElse(applicationToEdit.getIndustry());
+        JobType updatedJobType = editPersonDescriptor.getJobType().orElse(applicationToEdit.getJobType());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(applicationToEdit.getEmail());
+        Description updatedDescription = editPersonDescriptor.getDescription().orElse(applicationToEdit.getDescription());
+        ApplicationStatus updatedStatus = editPersonDescriptor.getStatus().orElse(applicationToEdit.getStatus());
 
-        return new InternshipApplication(updatedCompanyName, updatedIndustries, updatedJobType, updatedDescription, updatedStatus, updatedEmail);
+        return new InternshipApplication(updatedCompanyName, updatedIndustry, updatedJobType, updatedDescription, updatedStatus, updatedEmail);
     }
 
     @Override
@@ -123,38 +126,36 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the application with. Each non-empty field value will replace the
+     * corresponding field value of the application.
      */
     public static class EditPersonDescriptor {
         private CompanyName companyName;
+        private Industry industry;
         private JobType jobType;
         private Email email;
         private Description description;
-        private Industry industries;
-
         private ApplicationStatus status;
-
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.companyName);
-            setPhone(toCopy.jobType);
+            setIndustry(toCopy.industry);
+            setJobType(toCopy.jobType);
             setEmail(toCopy.email);
             setDescription(toCopy.description);
-            setIndustry(toCopy.industries);
+            setStatus(toCopy.status);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(companyName, jobType, email, description, industries);
+            return CollectionUtil.isAnyNonNull(companyName, industry, jobType, email, description, status);
         }
 
         public void setName(CompanyName companyName) {
@@ -165,11 +166,19 @@ public class EditCommand extends Command {
             return Optional.ofNullable(companyName);
         }
 
-        public void setPhone(JobType jobType) {
+        public void setIndustry(Industry industry) {
+            this.industry = industry;
+        }
+
+        public Optional<Industry> getIndustry() {
+            return Optional.ofNullable(industry);
+        }
+
+        public void setJobType(JobType jobType) {
             this.jobType = jobType;
         }
 
-        public Optional<JobType> getPhone() {
+        public Optional<JobType> getJobType() {
             return Optional.ofNullable(jobType);
         }
 
@@ -189,28 +198,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setIndustry(Industry industries) {
-            this.industries = industries;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Industry> getIndustries() {
-            return Optional.ofNullable(industries);
-        }
-
         public void setStatus(ApplicationStatus status) {
             this.status = status;
         }
 
-        public Optional<ApplicationStatus> getStatus() { return Optional.ofNullable(status);}
+        public Optional<ApplicationStatus> getStatus() {
+            return Optional.ofNullable(status);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -225,20 +219,21 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(companyName, otherEditPersonDescriptor.companyName)
+                    && Objects.equals(industry, otherEditPersonDescriptor.industry)
                     && Objects.equals(jobType, otherEditPersonDescriptor.jobType)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(description, otherEditPersonDescriptor.description)
-                    && Objects.equals(industries, otherEditPersonDescriptor.industries);
+                    && Objects.equals(status, otherEditPersonDescriptor.status);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("company name", companyName)
-                    .add("job type", jobType)
+                    .add("companyName", companyName)
+                    .add("industry", industry)
+                    .add("jobType", jobType)
                     .add("email", email)
                     .add("description", description)
-                    .add("industry", industries)
                     .add("status", status)
                     .toString();
         }

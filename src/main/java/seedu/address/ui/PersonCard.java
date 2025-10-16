@@ -2,9 +2,9 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.ApplicationStatus.ApplicationStatus;
 import seedu.address.model.Company.InternshipApplication;
 
 /**
@@ -18,19 +18,20 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
-    // --- START OF CHANGES ---
     @FXML
-    private Label companyName; // Renamed from 'name'
+    private Label companyName;
     @FXML
     private Label id;
     @FXML
-    private Label jobType; // Renamed from 'phone'
+    private Label jobType;
     @FXML
-    private Label description; // Renamed from 'address'
+    private Label description;
     @FXML
     private Label email;
     @FXML
-    private FlowPane industries; // Renamed from 'tags'
+    private Label industries;
+    @FXML
+    private Label status;
     // --- END OF CHANGES ---
 
     /**
@@ -40,15 +41,11 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.internshipApplication = internshipApplication;
         id.setText(displayedIndex + ". ");
-        // --- START OF CHANGES ---
         companyName.setText(internshipApplication.getName().CompanyName);
         jobType.setText(internshipApplication.getJobType().value);
         description.setText(internshipApplication.getDescription().value);
         email.setText(internshipApplication.getEmail().value);
-        Label industryLabel = new Label(internshipApplication.getIndustry().value);
-        industries.getChildren().add(industryLabel);
-        Label statusLabel = new Label("Status: " + internshipApplication.getStatus().value);
-        industries.getChildren().add(statusLabel);
-        // --- END OF CHANGES ---
+        industries.setText(internshipApplication.getIndustry().value);
+        status.setText(internshipApplication.getStatus().value);
     }
 }

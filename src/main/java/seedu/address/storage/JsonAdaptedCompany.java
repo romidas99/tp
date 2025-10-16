@@ -16,7 +16,7 @@ import seedu.address.model.ApplicationStatus.ApplicationStatus;
  * Jackson-friendly version of {@link InternshipApplication}.
  * This class maps the 5 core application fields to simple String fields for JSON serialization.
  */
-class JsonAdaptedCompany {
+class  JsonAdaptedCompany {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Application's %s field is missing!";
 
