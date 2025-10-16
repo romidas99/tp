@@ -44,10 +44,8 @@ public class AddCommandIntegrationTest {
     public void execute_duplicateApplication_throwsCommandException() {
         // This takes the first application from our sample data (Google)
         InternshipApplication applicationInList = model.getAddressBook().getPersonList().get(0);
-        
-        // We then try to add another application with the same core identity fields
-        // (company name, industry, job type) but a different email and description.
-        // According to our new logic, this should be considered a duplicate.
+        // Try to add the same application again; identity is based on name,
+        // so this should be treated as a duplicate.
         assertCommandFailure(new AddCommand(applicationInList), model,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
