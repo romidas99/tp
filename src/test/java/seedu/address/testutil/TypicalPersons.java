@@ -253,7 +253,7 @@ import seedu.address.model.Company.InternshipApplication;
  * A utility class containing a list of {@code InternshipApplication} objects to be used in tests.
  */
 public class TypicalPersons {
-
+        
     public static final InternshipApplication ALICE = new PersonBuilder().withName("Alice Pauline")
             .withDescription("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withJobType("94351253") // Using the new method name
