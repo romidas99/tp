@@ -145,7 +145,7 @@ If your changes to the data file makes its format invalid, the app will discard 
 Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., invalid values). Edit the data file only if you are confident you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Mark most interested internship roles `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -173,5 +173,5 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **List** | `list`
-| **Edit** | `edit INDEX [n/COMPANY_NAME] [i/INDUSTRY] [a/JOB_TYPE] [e/EMAIL] [t/DESCRIPTION] [s/STATUS]`<br> e.g.,`edit 2 s/Interviewing` |
+**Edit** | `edit INDEX [n/COMPANY_NAME] [i/INDUSTRY] [a/JOB_TYPE] [e/EMAIL] [t/DESCRIPTION] [s/STATUS]`<br> e.g.,`edit 2 s/Interviewing` 
 **Help** | `help`
