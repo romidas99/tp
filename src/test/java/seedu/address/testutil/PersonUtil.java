@@ -1,10 +1,15 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.Company.InternshipApplication;
-
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Person.
@@ -38,12 +43,18 @@ public class PersonUtil {
      */
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_COMPANY_NAME).append(name.toString()).append(" "));
-        descriptor.getJobType().ifPresent(jobType -> sb.append(PREFIX_JOB_TYPE).append(jobType.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getDescription().ifPresent(description -> sb.append(PREFIX_DESCRIPTION).append(description.value).append(" "));
-        descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.value).append(" "));
-        descriptor.getIndustry().ifPresent(industry -> sb.append(PREFIX_INDUSTRY).append(industry.value).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_COMPANY_NAME)
+                .append(name.toString()).append(" "));
+        descriptor.getJobType().ifPresent(jobType -> sb.append(PREFIX_JOB_TYPE)
+                .append(jobType.value).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL)
+                .append(email.value).append(" "));
+        descriptor.getDescription().ifPresent(description -> sb.append(PREFIX_DESCRIPTION)
+                .append(description.value).append(" "));
+        descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS)
+                .append(status.value).append(" "));
+        descriptor.getIndustry().ifPresent(industry -> sb.append(PREFIX_INDUSTRY)
+                .append(industry.value).append(" "));
 
         return sb.toString();
     }

@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -13,7 +18,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.ApplicationStatus.ApplicationStatus;
 import seedu.address.model.Company.CompanyName;
 import seedu.address.model.Company.Description;
@@ -21,6 +25,7 @@ import seedu.address.model.Company.Email;
 import seedu.address.model.Company.InternshipApplication;
 import seedu.address.model.Company.JobType;
 import seedu.address.model.Industry.Industry;
+import seedu.address.model.Model;
 
 
 /**
@@ -72,33 +77,49 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        InternshipApplication internshipApplicationToEdit = lastShownList.get(index.getZeroBased());
-        InternshipApplication editedInternshipApplication = createEditedApplication(internshipApplicationToEdit, editPersonDescriptor);
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
 
-        if (!internshipApplicationToEdit.isSameApplication(editedInternshipApplication) && model.hasPerson(editedInternshipApplication)) {
+        InternshipApplication internshipApplicationToEdit = lastShownList.get(index.getZeroBased());
+        InternshipApplication editedInternshipApplication = createEditedApplication(
+                internshipApplicationToEdit, editPersonDescriptor);
+
+        if (!internshipApplicationToEdit.isSameApplication(editedInternshipApplication)
+                && model.hasPerson(editedInternshipApplication)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(internshipApplicationToEdit, editedInternshipApplication);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedInternshipApplication)));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedInternshipApplication)));
     }
 
     /**
      * Creates and returns a {@code InternshipApplication} with the details of {@code applicationToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static InternshipApplication createEditedApplication(InternshipApplication applicationToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static InternshipApplication createEditedApplication(
+            InternshipApplication applicationToEdit,
+            EditPersonDescriptor editPersonDescriptor) {
         assert applicationToEdit != null;
 
-        CompanyName updatedCompanyName = editPersonDescriptor.getName().orElse(applicationToEdit.getName());
-        Industry updatedIndustry = editPersonDescriptor.getIndustry().orElse(applicationToEdit.getIndustry());
-        JobType updatedJobType = editPersonDescriptor.getJobType().orElse(applicationToEdit.getJobType());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(applicationToEdit.getEmail());
-        Description updatedDescription = editPersonDescriptor.getDescription().orElse(applicationToEdit.getDescription());
-        ApplicationStatus updatedStatus = editPersonDescriptor.getStatus().orElse(applicationToEdit.getStatus());
+        CompanyName updatedCompanyName = editPersonDescriptor.getName()
+                .orElse(applicationToEdit.getName());
+        Industry updatedIndustry = editPersonDescriptor.getIndustry()
+                .orElse(applicationToEdit.getIndustry());
+        JobType updatedJobType = editPersonDescriptor.getJobType()
+                .orElse(applicationToEdit.getJobType());
+        Email updatedEmail = editPersonDescriptor.getEmail()
+                .orElse(applicationToEdit.getEmail());
+        Description updatedDescription = editPersonDescriptor.getDescription()
+                .orElse(applicationToEdit.getDescription());
+        ApplicationStatus updatedStatus = editPersonDescriptor.getStatus()
+                .orElse(applicationToEdit.getStatus());
 
-        return new InternshipApplication(updatedCompanyName, updatedIndustry, updatedJobType, updatedDescription, updatedStatus, updatedEmail);
+        return new InternshipApplication(updatedCompanyName, updatedIndustry, updatedJobType,
+                updatedDescription, updatedStatus, updatedEmail);
     }
 
     @Override
@@ -232,10 +253,10 @@ public class EditCommand extends Command {
                     .add("companyName", companyName)
                     .add("industry", industry)
                     .add("jobType", jobType)
-                    .add("email", email)
-                    .add("description", description)
-                    .add("status", status)
-                    .toString();
+                .add("email", email)
+                .add("description", description)
+                .add("status", status)
+                .toString();
         }
     }
 }

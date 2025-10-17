@@ -2,7 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -13,8 +18,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Company.InternshipApplication;
-import seedu.address.model.Model;
 import seedu.address.model.Company.NameContainsKeywordsPredicate;
+import seedu.address.model.Model;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -62,12 +67,14 @@ public class CommandTestUtil {
     public static final String STATUS_DESC_SAVED = " " + PREFIX_STATUS + VALID_STATUS_SAVED;
 
     // Invalid Field Descriptors
-    public static final String INVALID_NAME_DESC = " " + PREFIX_COMPANY_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_JOB_TYPE_DESC = " " + PREFIX_JOB_TYPE + "a*"; // '*' not allowed
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + " "; // cannot be blank
-    public static final String INVALID_INDUSTRY_DESC = " " + PREFIX_INDUSTRY + "not-a-valid-industry"; // not in predefined list
-    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "pending"; // not a valid status
+    public static final String INVALID_NAME_DESC = " " + PREFIX_COMPANY_NAME + "James&"; //& not allowed
+    public static final String INVALID_JOB_TYPE_DESC = " " + PREFIX_JOB_TYPE + "a*"; //* not allowed
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; //missing '@'
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION
+            + "a".repeat(201); //exceeds max 200
+    public static final String INVALID_INDUSTRY_DESC = " " + PREFIX_INDUSTRY
+            + "not-a-valid-industry"; //not in list
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "pending"; //invalid
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
