@@ -6,10 +6,13 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ApplicationStatus.ApplicationStatus;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.Company.*;
 import seedu.address.model.Company.CompanyName;
+import seedu.address.model.Company.Description;
+import seedu.address.model.Company.Email;
+import seedu.address.model.Company.InternshipApplication;
+import seedu.address.model.Company.JobType;
 import seedu.address.model.Industry.Industry;
+import seedu.address.model.ReadOnlyAddressBook;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -17,7 +20,9 @@ import seedu.address.model.Industry.Industry;
 public class SampleDataUtil {
     public static InternshipApplication[] getSamplePersons() {
         return new InternshipApplication[] {
-            new InternshipApplication(new CompanyName("XYZ PTE LTD"), new Industry("Finance"), new JobType("SWE Intern"), new Description("Need to be proficient in c++"), new ApplicationStatus("Saved"), new Email("XYZ@gmail.com"))
+            new InternshipApplication(new CompanyName("XYZ PTE LTD"), new Industry("Finance"),
+                    new JobType("SWE Intern"), new Description("Need to be proficient in c++"),
+                    new ApplicationStatus("Saved"), new Email("XYZ@gmail.com"))
         };
     }
 

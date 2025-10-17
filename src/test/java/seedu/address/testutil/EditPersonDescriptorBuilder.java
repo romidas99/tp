@@ -1,8 +1,12 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.Company.*;
+import seedu.address.model.ApplicationStatus.ApplicationStatus;
 import seedu.address.model.Company.CompanyName;
+import seedu.address.model.Company.Description;
+import seedu.address.model.Company.Email;
+import seedu.address.model.Company.InternshipApplication;
+import seedu.address.model.Company.JobType;
 import seedu.address.model.Industry.Industry;
 
 /**
@@ -26,10 +30,11 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(InternshipApplication internshipApplication) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(internshipApplication.getName());
-        descriptor.setPhone(internshipApplication.getJobType());
+        descriptor.setJobType(internshipApplication.getJobType());
         descriptor.setEmail(internshipApplication.getEmail());
         descriptor.setDescription(internshipApplication.getDescription());
         descriptor.setIndustry(internshipApplication.getIndustry());
+        descriptor.setStatus(internshipApplication.getStatus());
     }
 
     /**
@@ -41,10 +46,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code JobType} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new JobType(phone));
+    public EditPersonDescriptorBuilder withJobType(String jobType) {
+        descriptor.setJobType(new JobType(jobType));
         return this;
     }
 
@@ -57,19 +62,26 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Description} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setDescription(new Description(address));
+    public EditPersonDescriptorBuilder withDescription(String description) {
+        descriptor.setDescription(new Description(description));
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Sets the {@code Industry} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String industry) {
+    public EditPersonDescriptorBuilder withIndustry(String industry) {
         descriptor.setIndustry(new Industry(industry));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ApplicationStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withStatus(String status) {
+        descriptor.setStatus(new ApplicationStatus(status));
         return this;
     }
 
