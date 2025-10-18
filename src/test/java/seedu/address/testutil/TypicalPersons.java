@@ -24,7 +24,7 @@ import seedu.address.model.Company.InternshipApplication;
  * A utility class containing a list of {@code InternshipApplication} objects to be used in tests.
  */
 public class TypicalPersons {
-
+        
     public static final InternshipApplication ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com").withJobType("SWE Intern")
             .withDescription("Platform team")
@@ -73,7 +73,7 @@ public class TypicalPersons {
         }
         return ab;
     }
-
+    
     public static List<InternshipApplication> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
