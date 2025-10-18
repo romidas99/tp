@@ -1,3 +1,5 @@
+package seedu.address.testutil;
+
 import seedu.address.model.ApplicationStatus.ApplicationStatus;
 import seedu.address.model.Company.CompanyName;
 import seedu.address.model.Company.Description;
