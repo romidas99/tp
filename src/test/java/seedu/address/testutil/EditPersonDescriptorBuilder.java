@@ -171,7 +171,12 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.Company.*;
+import seedu.address.model.ApplicationStatus.ApplicationStatus;
+import seedu.address.model.Company.CompanyName;
+import seedu.address.model.Company.Description;
+import seedu.address.model.Company.Email;
+import seedu.address.model.Company.InternshipApplication;
+import seedu.address.model.Company.JobType;
 import seedu.address.model.Industry.Industry;
 
 /**
@@ -201,6 +206,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setDescription(internshipApplication.getDescription());
         // Corrected from setIndustries to setIndustry
         descriptor.setIndustry(internshipApplication.getIndustry());
+        descriptor.setStatus(internshipApplication.getStatus());
     }
 
     /**
@@ -214,9 +220,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code JobType} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
-        // Corrected from setPhone to setJobType
-        descriptor.setJobType(new JobType(phone));
+    public EditPersonDescriptorBuilder withJobType(String jobType) {
+        descriptor.setJobType(new JobType(jobType));
         return this;
     }
 
@@ -231,8 +236,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Description} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setDescription(new Description(address));
+    public EditPersonDescriptorBuilder withDescription(String description) {
+        descriptor.setDescription(new Description(description));
         return this;
     }
 
@@ -242,6 +247,14 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withIndustry(String industry) {
         // Corrected from setIndustries to setIndustry
         descriptor.setIndustry(new Industry(industry));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ApplicationStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withStatus(String status) {
+        descriptor.setStatus(new ApplicationStatus(status));
         return this;
     }
 
