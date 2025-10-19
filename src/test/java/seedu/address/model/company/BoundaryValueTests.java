@@ -6,12 +6,20 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+
 /**
- * Tests boundary values for various fields.
- * Important for ensuring validation works at edge cases.
+ * Boundary value tests for company-related value objects:
+ * Description, CompanyName, JobType and Email.
+ *
+ * These tests cover edge cases such as empty strings and maximum lengths.
  */
 public class BoundaryValueTests {
 
+
+    /**
+     * Tests that a description exactly at the maximum allowed length (200)
+     * is considered valid and can be constructed.
+     */
     @Test
     public void description_exactlyAtMaxLength_valid() {
         // Description max length is 200 characters
@@ -23,6 +31,11 @@ public class BoundaryValueTests {
         assertTrue(description.value.length() == 200);
     }
 
+
+    /**
+     * Tests that a description one character over the maximum length (201)
+     * is invalid and construction throws an IllegalArgumentException.
+     */
     @Test
     public void description_oneCharacterOverMaxLength_invalid() {
         // 201 characters - exceeds max
@@ -33,6 +46,10 @@ public class BoundaryValueTests {
         assertThrows(IllegalArgumentException.class, () -> new Description(overMaxLength));
     }
 
+    /**
+     * Tests that a description one character under the maximum length (199)
+     * is valid and can be constructed.
+     */
     @Test
     public void description_oneCharacterUnderMaxLength_valid() {
         // 199 characters - under max
@@ -43,6 +60,9 @@ public class BoundaryValueTests {
         assertTrue(description.value.length() == 199);
     }
 
+    /**
+     * Tests that an empty description is allowed and can be constructed.
+     */
     @Test
     public void description_emptyString_valid() {
         // Empty descriptions are allowed
@@ -52,6 +72,9 @@ public class BoundaryValueTests {
         assertTrue(description.value.isEmpty());
     }
 
+    /**
+     * Tests that a single-character description is valid.
+     */
     @Test
     public void description_singleCharacter_valid() {
         // Minimum non-empty length
@@ -61,6 +84,9 @@ public class BoundaryValueTests {
         assertTrue(description.value.equals("a"));
     }
 
+    /**
+     * Tests that an empty company name is invalid and construction throws.
+     */
     @Test
     public void companyName_emptyString_invalid() {
         // Company name cannot be empty
@@ -68,6 +94,9 @@ public class BoundaryValueTests {
         assertThrows(IllegalArgumentException.class, () -> new CompanyName(""));
     }
 
+    /**
+     * Tests that a single character company name is valid.
+     */
     @Test
     public void companyName_singleCharacter_valid() {
         // Single character is valid
@@ -77,6 +106,9 @@ public class BoundaryValueTests {
         assertTrue(name.value.equals("A"));
     }
 
+    /**
+     * Tests that a company name starting with a special character is invalid.
+     */
     @Test
     public void companyName_specialCharactersAtStart_invalid() {
         // Cannot start with special character
@@ -84,12 +116,18 @@ public class BoundaryValueTests {
         assertThrows(IllegalArgumentException.class, () -> new CompanyName("@Google"));
     }
 
+    /**
+     * Tests that an empty job type is invalid and construction throws.
+     */
     @Test
     public void jobType_emptyString_invalid() {
         assertFalse(JobType.isValidJobType(""));
         assertThrows(IllegalArgumentException.class, () -> new JobType(""));
     }
 
+    /**
+     * Tests that a single character job type is valid.
+     */
     @Test
     public void jobType_singleCharacter_valid() {
         assertTrue(JobType.isValidJobType("A"));
@@ -98,6 +136,9 @@ public class BoundaryValueTests {
         assertTrue(jobType.value.equals("A"));
     }
 
+    /**
+     * Tests that a job type at the maximum allowed length (50) is valid.
+     */
     @Test
     public void jobType_maxLength_valid() {
         // JobType has max length of 50
@@ -108,6 +149,9 @@ public class BoundaryValueTests {
         assertTrue(jobType.value.length() == 50);
     }
 
+    /**
+     * Tests that the minimum valid email (e.g., a@bc) is accepted.
+     */
     @Test
     public void email_minimumValid_accepted() {
         // Minimum valid email: a@bc (4 characters)
@@ -117,6 +161,9 @@ public class BoundaryValueTests {
         assertTrue(email.value.equals("a@bc"));
     }
 
+    /**
+     * Tests that an email with a very long local part is still valid.
+     */
     @Test
     public void email_veryLongLocalPart_valid() {
         // Long local part should be valid
@@ -128,12 +175,18 @@ public class BoundaryValueTests {
         assertTrue(email.value.equals(longEmail));
     }
 
+    /**
+     * Tests that a domain ending with at least two characters is valid.
+     */
     @Test
     public void email_domainWithMinimumTwoChars_valid() {
         // Domain must end with at least 2 characters
         assertTrue(Email.isValidEmail("test@example.co"));
     }
 
+    /**
+     * Tests that a domain ending with only one character is invalid.
+     */
     @Test
     public void email_domainWithOneChar_invalid() {
         // Domain ending with 1 character is invalid
