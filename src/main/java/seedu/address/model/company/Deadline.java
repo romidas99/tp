@@ -44,8 +44,11 @@ public class Deadline {
     public static boolean isValidDeadline(String test) {
         assert test != null : "Test string cannot be null";
         try {
-            LocalDate.parse(test, INPUT_FORMAT);
-            return true;
+            LocalDate parsedDate = LocalDate.parse(test, INPUT_FORMAT);
+            // Strict validation: ensure the parsed date matches the input exactly
+            // This prevents invalid dates like 2025-02-31 from being auto-corrected to 2025-02-28
+            String reformattedDate = parsedDate.format(INPUT_FORMAT);
+            return test.equals(reformattedDate);
         } catch (DateTimeParseException e) {
             return false;
         }
