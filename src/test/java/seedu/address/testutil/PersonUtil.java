@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.Company.InternshipApplication;
+import seedu.address.model.company.InternshipApplication;
 
 /**
  * A utility class for InternshipApplication.
@@ -28,7 +28,7 @@ public class PersonUtil {
      */
     public static String getPersonDetails(InternshipApplication internshipApplication) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_COMPANY_NAME).append(internshipApplication.getName().CompanyName).append(" ");
+        sb.append(PREFIX_COMPANY_NAME).append(internshipApplication.getName().value).append(" ");
         // Other version: .toString() after .getName()
         sb.append(PREFIX_JOB_TYPE).append(internshipApplication.getJobType().value).append(" ");
         sb.append(PREFIX_EMAIL).append(internshipApplication.getEmail().value).append(" ");
