@@ -339,37 +339,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. Required fields are missing.
 
   * 1a1. BizBook shows an error message indicating which fields are missing.
-  
+
     Use case ends.
 
 * 2a. Company name format is invalid.
-  
+
   * 2a1. BizBook shows an error message about invalid format.
-  
+
     Use case ends.
 
 * 2b. Industry is not from the predefined list.
-  
+
   * 2b1. BizBook shows an error message with valid industry options.
-  
+
     Use case ends.
 
 * 2c. Status is not from the predefined list.
-  
+
   * 2c1. BizBook shows an error message with valid status options.
-  
+
     Use case ends.
 
 * 2d. Deadline format is invalid.
-  
+
   * 2d1. BizBook shows an error message about the required YYYY-MM-DD format.
-  
+
     Use case ends.
 
 * 2e. An application for this company already exists.
-  
+
   * 2e1. BizBook shows a duplicate company error message.
-  
+
     Use case ends.
 
 #### Use case: UC02 - Update application status
@@ -388,19 +388,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-  
+
   * 2a1. BizBook shows a message indicating no applications exist.
-  
+
     Use case ends.
 
 * 4a. The given index is invalid.
-  
+
   * 4a1. BizBook shows an error message.
-  
+
     Use case resumes at step 3.
 
 * 4b. The given status is not valid.
-  
+
   * 4b1. BizBook shows an error message with valid status options.
 
     Use case resumes at step 3.
