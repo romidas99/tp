@@ -336,39 +336,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. Required fields are missing.
+* 1a. Required fields are missing.
 
-  * 2a1. BizBook shows an error message indicating which fields are missing.
+  * 1a1. BizBook shows an error message indicating which fields are missing.
   
     Use case ends.
 
-* 2b. Company name format is invalid.
+* 2a. Company name format is invalid.
   
-  * 2b1. BizBook shows an error message about invalid format.
-  
-    Use case ends.
-
-* 2c. Industry is not from the predefined list.
-  
-  * 2c1. BizBook shows an error message with valid industry options.
+  * 2a1. BizBook shows an error message about invalid format.
   
     Use case ends.
 
-* 2d. Status is not from the predefined list.
+* 2b. Industry is not from the predefined list.
   
-  * 2d1. BizBook shows an error message with valid status options.
-  
-    Use case ends.
-
-* 2e. Deadline format is invalid.
-  
-  * 2e1. BizBook shows an error message about the required YYYY-MM-DD format.
+  * 2b1. BizBook shows an error message with valid industry options.
   
     Use case ends.
 
-* 2f. An application for this company already exists.
+* 2c. Status is not from the predefined list.
   
-  * 2f1. BizBook shows a duplicate company error message.
+  * 2c1. BizBook shows an error message with valid status options.
+  
+    Use case ends.
+
+* 2d. Deadline format is invalid.
+  
+  * 2d1. BizBook shows an error message about the required YYYY-MM-DD format.
+  
+    Use case ends.
+
+* 2e. An application for this company already exists.
+  
+  * 2e1. BizBook shows a duplicate company error message.
   
     Use case ends.
 
