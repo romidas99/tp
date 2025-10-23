@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-#### Use case: UC02 - Edit an application status
+#### Use case: UC02 - Update application status
 
 **MSS**
 
@@ -391,12 +391,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   * 2a1. BizBook shows a message indicating no applications exist.
-
-    Use case ends.
-
-* 3a. No fields are provided for editing.
-
-  * 3a1. BizBook shows an error message indicating at least one field must be provided.
 
     Use case ends.
 
@@ -499,32 +493,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
-#### Use case: UC06 - Find applications by company name
-
-**MSS**
-
-1. User requests to find applications using one or more keywords.
-2. BizBook validates the input.
-3. BizBook searches for applications whose company names contain any of the keywords.
-4. BizBook displays the matching applications.
-5. BizBook shows the count of matching applications.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No keywords are provided.
-
-  * 1a1. BizBook shows an error message with usage instructions.
-
-    Use case ends.
-
-* 3a. No applications match the keywords.
-
-  * 3a1. BizBook shows a message indicating no matches found.
-
-    Use case ends.
-
 ### Non-Functional Requirements
 
 1. **Platform Compatibility**: Should work on any mainstream OS (Windows, Linux, macOS) as long as it has Java 17 or above installed.
@@ -571,8 +539,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Job Type**: The specific internship role title or position (e.g., "Software Engineer Intern", "Data Analyst Intern")
 
-* **Deadline**: The submission cutoff date for an internship application, stored in YYYY-MM-DD format (e.g., 2024-12-31) and displayed in a user-friendly format (e.g., Dec 31 2024)
-
 * **Pipeline**: The complete collection of internship applications a student is tracking in BizBook
 
 * **CLI**: Command Line Interface - a text-based interface for interacting with the application
@@ -580,6 +546,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Filter**: A command operation that displays only applications matching specific criteria
 
 * **Archive**: A feature to hide completed applications from the active view while preserving them for historical reference
+
+* **Deadline**: The submission cutoff date for an internship application
 
 * **Contact Person**: The recruiter or HR representative associated with a specific internship application
 
