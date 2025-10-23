@@ -525,33 +525,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-#### Use case: UC07 - View help
-
-**MSS**
-
-1. User requests to view help.
-2. BizBook opens the help window with a link to the user guide.
-3. BizBook shows a success message.
-
-   Use case ends.
-
-**Extensions**
-
-* None (command always succeeds).
-
-#### Use case: UC08 - Exit the application
-
-**MSS**
-
-1. User requests to exit the application.
-2. BizBook closes and terminates the program.
-
-   Use case ends.
-
-**Extensions**
-
-* None (command always succeeds).
-
 ### Non-Functional Requirements
 
 1. **Platform Compatibility**: Should work on any mainstream OS (Windows, Linux, macOS) as long as it has Java 17 or above installed.
@@ -608,11 +581,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Archive**: A feature to hide completed applications from the active view while preserving them for historical reference
 
-* **Date**: The interview or application deadline date for an internship application depending on the status
-
 * **Contact Person**: The recruiter or HR representative associated with a specific internship application
-
-* **Find**: A command that searches and filters applications based on company name keywords, supporting case-insensitive partial matching
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -642,157 +611,20 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Adding an application
+### Deleting a internshipApplication
 
-1. Adding a new internship application
+1. Deleting a internshipApplication while all internshipApplications are being shown
 
-   1. Prerequisites: Have some applications in the list, but not one for "Apple Inc".
-
-   1. Test case: `add n/Apple Inc i/Technology a/iOS Developer Intern t/Swift development e/careers@apple.com s/Saved d/2025-06-30`<br>
-      Expected: New application for Apple Inc is added to the list. Success message with application details shown in the status message.
-
-   1. Test case: `add n/Google i/Technology a/SWE Intern t/Backend e/careers@google.com s/Applied d/2025-05-15` (where Google already exists)<br>
-      Expected: No application is added. Error message indicating duplicate company.
-
-   1. Test case: `add n/Microsoft i/InvalidIndustry a/SWE Intern t/Cloud e/careers@microsoft.com s/Saved d/2025-07-01`<br>
-      Expected: No application is added. Error message showing valid industry options.
-
-   1. Test case: `add n/Amazon i/Technology a/SWE Intern`<br>
-      Expected: No application is added. Error message indicating missing required fields.
-
-   1. Test case: `add n/Meta i/Technology a/SWE Intern t/AI e/careers@meta.com s/Saved d/2025-13-45`<br>
-      Expected: No application is added. Error message about invalid date format.
-
-   1. Other incorrect add commands to try: missing prefixes, invalid status values<br>
-      Expected: Error messages indicating the specific validation failure.
-
-1. _{ more test cases …​ }_
-
-### Editing an application
-
-1. Editing fields of an existing application
-
-   1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
-
-   1. Test case: `edit 1 s/Interviewing`<br>
-      Expected: First application's status is updated to "Interviewing". Success message with updated details shown.
-
-   1. Test case: `edit 2 n/Google Singapore i/Technology d/2025-08-31`<br>
-      Expected: Second application's company name, industry, and deadline are updated. Success message shown.
-
-   1. Test case: `edit 1`<br>
-      Expected: No application is edited. Error message indicating at least one field must be provided.
-
-   1. Test case: `edit 0 s/Applied`<br>
-      Expected: No application is edited. Error message about invalid index.
-
-   1. Test case: `edit 1 i/InvalidIndustry`<br>
-      Expected: No application is edited. Error message showing valid industry options.
-
-   1. Other incorrect edit commands to try: `edit x ...` (where x is larger than list size), invalid status, invalid deadline format<br>
-      Expected: Appropriate error messages.
-
-1. _{ more test cases …​ }_
-
-### Listing all applications
-
-1. Listing all applications after filtering
-
-   1. Prerequisites: Have multiple applications in the list. Use find command to filter the list (e.g., `find Google`).
-
-   1. Test case: `list`<br>
-      Expected: All applications are displayed again (filter is removed). Success message shown.
-
-1. _{ more test cases …​ }_
-
-### Finding applications
-
-1. Finding applications by company name
-
-   1. Prerequisites: Have multiple applications in the list with different company names (e.g., "Google", "Microsoft", "DBS Bank", "OCBC"). Some applications may have "Technology" as industry or "Software" in job type.
-
-   1. Test case: `find Google`<br>
-      Expected: All applications with "Google" as a complete word in the company name are displayed. Applications with "Google" in other fields (like job type or description) are NOT included. Number of applications found shown in the status message.
-
-   1. Test case: `find google microsoft`<br>
-      Expected: All applications with either "google" or "microsoft" as complete words in the company name field are displayed (case-insensitive, OR condition). Other fields are not searched.
-
-   1. Test case: `find`<br>
-      Expected: Error message indicating invalid command format. Usage instructions shown.
-
-   1. Test case: `find xyz` (where no company contains "xyz" as a complete word)<br>
-      Expected: Empty list displayed. Message indicates 0 applications found.
-
-   1. Test case: `find tech` (with companies "Tech Corp" and "TechCorp")<br>
-      Expected: Only "Tech Corp" is displayed (complete word match only).
-
-   1. Other test cases: `find bank`, `find DBS OCBC`<br>
-      Expected: Applications with matching complete words in company name are displayed.
-
-1. _{ more test cases …​ }_
-
-### Deleting an application
-
-1. Deleting an application while all applications are being shown
-
-   1. Prerequisites: List all applications using the `list` command. Multiple applications in the list.
+   1. Prerequisites: List all internshipApplications using the `list` command. Multiple internshipApplications in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First application is deleted from the list. Details of the deleted application shown in the status message.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No application is deleted. Error message about invalid index shown in the status message.
+      Expected: No internshipApplication is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `delete -1` (where x is larger than the list size)<br>
-      Expected: Error messages about invalid command format or invalid index.
-
-1. Deleting an application after filtering
-
-   1. Prerequisites: Use find command to filter the list (e.g., `find Google`). At least 2 matching applications shown.
-
-   1. Test case: `delete 1`<br>
-      Expected: First application in the filtered list is deleted. Details shown in status message.
-
-1. _{ more test cases …​ }_
-
-### Clearing all applications
-
-1. Clearing all data
-
-   1. Prerequisites: Have multiple applications in the list.
-
-   1. Test case: `clear`<br>
-      Expected: All applications are removed. Success message confirming the address book has been cleared.
-
-   1. Test case: `clear` (when list is already empty)<br>
-      Expected: Success message still shown (command succeeds even on empty list).
-
-1. _{ more test cases …​ }_
-
-### Viewing help
-
-1. Opening the help window
-
-   1. Test case: `help`<br>
-      Expected: Help window opens showing a link to the user guide. Success message shown.
-
-   1. Test case: Press F1 key<br>
-      Expected: Help window opens (same as typing `help` command).
-
-   1. Test case: Click Help menu > Help<br>
-      Expected: Help window opens (same as typing `help` command).
-
-1. _{ more test cases …​ }_
-
-### Exiting the application
-
-1. Exiting BizBook
-
-   1. Test case: `exit`<br>
-      Expected: Application closes and terminates.
-
-   1. Test case: Close the window using the X button<br>
-      Expected: Application closes and terminates (same as `exit` command).
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -800,13 +632,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. Test case: Delete the `data/addressbook.json` file, then launch the application<br>
-      Expected: Application starts with sample data.
-
-   1. Test case: Edit `data/addressbook.json` to have invalid JSON format (e.g., remove a closing brace), then launch the application<br>
-      Expected: Application starts with an empty data file (corrupted data is discarded).
-
-   1. Test case: Make changes to applications (add, edit, or delete), then check `data/addressbook.json`<br>
-      Expected: File is automatically updated with the latest data.
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
